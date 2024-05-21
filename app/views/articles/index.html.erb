@@ -1,0 +1,29 @@
+<head>
+  <!-- ... autres balises ... -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<div class="container">
+  <ul>
+    <% @limited_articles.each do |article| %>
+      <div class="articles">
+        <li class="text">
+          <div class="article-content">
+            <%= link_to article.title, article_path(article) %>
+          </div>
+          <div class="article-delete">
+            <%= link_to article_path(article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </div>
+        </li>
+      </div>
+    <% end %>
+  </ul>
+
+  <% if @articles.size > 10 %>
+    <%= link_to "Show more", articles_path, class: "btn" %>
+  <% end %>
+
+  <%= link_to "Add article", new_article_path, class: "btn" %>
+</div>
